@@ -1,4 +1,7 @@
 
+zip -FFv  --output   # copy zip
+
+
 # FLAME  in IEEE portal
 # THE FLAME DATASET: AERIAL IMAGERY
 https://ieee-dataport.org/open-access/flame-dataset-aerial-imagery-pile-burn-detection-using-drones-uavs
