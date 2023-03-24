@@ -1,5 +1,5 @@
 
-zip -FFv  --output   # copy zip
+zip -FFv  --out   # copy zip
 
 
 # FLAME  in IEEE portal

@@ -8,10 +8,21 @@
 
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: ../datasets #360data/coco128  # dataset root dir
-train: images/train2017  # train images (relative to 'path') 128 images
-val: images/train2017  # val images (relative to 'path') 128 images
-test:  # test images (optional)
+path: ../datasets/coco128  # dataset root dir
+train: images/train2017    # train images (relative to 'path') 128 images
+# labels/train2017/ txt
+val: images/train2017      # val images (relative to 'path') 128 images
+test:                      # test images (optional)
+
+# seg,
+# label, 1234, xywh, are the coordinates of the top left corner of the box an
+# Segmentation mask (polygon or RLE format);
+
+# segmentation格式取决于这个实例是一个单个的对象（即iscrowd=0，将使用polygons格式）还是一组对象（即iscrowd=1，将使用RLE格式）
+# 1. polygons格式：[x1,y1,x2,y2,x3,y3,...]，其中x1,y1是多边形的第一个点，x2,y2是多边形的第二个点，以此类推。
+# RLE 格式：[counts, size], counts是一个编码后的字符串，size是一个二元组，表示mask的宽和高。
+
+
 
 # Classes
 names:
