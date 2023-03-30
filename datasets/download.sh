@@ -38,27 +38,22 @@ http://signal.ee.bilkent.edu.tr/VisiFire/Demo/SampleClips.html
 
 
 # UC Merced Wildfire Dataset
-
-# Fire Images
-kaggle datasets download -d phylake1337/fire-dataset
-
-# classification
-kaggle datasets download -d kutaykutlu/forest-fire
-kaggle datasets download -d phylake1337/fire-dataset
-kaggle datasets download -d dataclusterlabs/fire-and-smoke-dataset
+# Fire Images classification
+#kaggle datasets download -d phylake1337/fire-dataset
+#kaggle datasets download -d kutaykutlu/forest-fire
+#kaggle datasets download -d phylake1337/fire-dataset
+#kaggle datasets download -d dataclusterlabs/fire-and-smoke-dataset
 
 
 
-Wildfire Smoke Dataset
+# Wildfire Smoke Dataset (WSD) BBOX
 https://github.com/aiformankind/wildfire-smoke-dataset
 gdown  1mUgVvnctpdZ8VZgihIDMoeUgkhsx1iAH
+gdown --folder 1IKXN2-hxTrEQsIIKOxiUAuLgoxubA9Wq
 
 
-
-Domestic-Fire-and-Smoke-Dataset
-with anno bbox, charge
-
-
+# D-Fire: https://github.com/gaiasd/DFireDataset BBOX
+gdown --folder 1DWgsQLVgkkLM8m-VcugHNpD5WYDbjYp5
 
 
 # Ref to https://github.com/DRMALEK/Wildfire_Research_Resources
