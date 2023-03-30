@@ -36,7 +36,7 @@ def viz(img, flo, id):
     # plt.show()
     os.makedirs('demo_results', exist_ok=True)
 
-    cv2.imwrite('demo_results/{}.jpg'.format(id), img_flo[:, :, [2,1,0]]/255.0)
+    cv2.imwrite('demo_results/{}.jpg'.format(id), img_flo[:, :, [2,1,0]])
 
     # cv2.imshow('image', img_flo[:, :, [2,1,0]]/255.0)
     # cv2.waitKey()
@@ -55,7 +55,7 @@ def demo(args):
                  glob.glob(os.path.join(args.path, '*.jpg'))
         
         images = sorted(images)
-        for id, imfile1, imfile2 in enumerate(zip(images[:-1], images[1:])):
+        for id, (imfile1, imfile2) in enumerate(zip(images[:-1], images[1:])):
             image1 = load_image(imfile1)
             image2 = load_image(imfile2)
 
@@ -65,6 +65,7 @@ def demo(args):
             flow_low, flow_up = model(image1, image2, iters=20, test_mode=True)
             viz(image1, flow_up, id=id)
 
+    print("Done")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
