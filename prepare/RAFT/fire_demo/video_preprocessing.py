@@ -41,7 +41,7 @@ class videoReader(object):
             if count % self.fps == 0:
                 frame_id = 0
             if frame_id<frame_interval*self.frame_kept_per_second and frame_id%frame_interval == 0:
-                save_name = '{0}/{1:05d}.jpg'.format(self.frame_save_path, count)
+                save_name = '{0}/frame_{1:04d}.jpg'.format(self.frame_save_path, count)
                 cv2.imencode('.jpg', image)[1].tofile(save_name)
 
             frame_id += 1
@@ -65,8 +65,7 @@ class process_dataset(object):
                 print('Processing: {}/{}'.format(i, len(self.videos_list)))
                 print('*******************************************')
 
-            frame_folder = './fire_demo/frame' + '-{:02d}-FPS'.format(self.frame_kept_per_second)
-            frame_folder = each_video.replace("video.mp4", frame_folder)
+            frame_folder = './fire_demo/frame'
 
             if not os.path.exists(frame_folder):
                 os.mkdir(frame_folder)
