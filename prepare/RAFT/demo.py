@@ -23,7 +23,7 @@ def load_image(imfile):
     return img[None].to(DEVICE)
 
 
-def viz(img, flo):
+def viz(img, flo, id):
     img = img[0].permute(1,2,0).cpu().numpy()
     flo = flo[0].permute(1,2,0).cpu().numpy()
     
@@ -34,9 +34,12 @@ def viz(img, flo):
     # import matplotlib.pyplot as plt
     # plt.imshow(img_flo / 255.0)
     # plt.show()
+    os.makedirs('demo_results', exist_ok=True)
 
-    cv2.imshow('image', img_flo[:, :, [2,1,0]]/255.0)
-    cv2.waitKey()
+    cv2.imwrite('demo_results/{}.jpg'.format(id), img_flo[:, :, [2,1,0]]/255.0)
+
+    # cv2.imshow('image', img_flo[:, :, [2,1,0]]/255.0)
+    # cv2.waitKey()
 
 
 def demo(args):
@@ -52,7 +55,7 @@ def demo(args):
                  glob.glob(os.path.join(args.path, '*.jpg'))
         
         images = sorted(images)
-        for imfile1, imfile2 in zip(images[:-1], images[1:]):
+        for id, imfile1, imfile2 in enumerate(zip(images[:-1], images[1:])):
             image1 = load_image(imfile1)
             image2 = load_image(imfile2)
 
@@ -60,7 +63,7 @@ def demo(args):
             image1, image2 = padder.pad(image1, image2)
 
             flow_low, flow_up = model(image1, image2, iters=20, test_mode=True)
-            viz(image1, flow_up)
+            viz(image1, flow_up, id=id)
 
 
 if __name__ == '__main__':
