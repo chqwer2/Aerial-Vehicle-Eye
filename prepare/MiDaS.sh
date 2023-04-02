@@ -18,6 +18,12 @@ if [ "$download" = true ] ; then
 
     mv dpt_swin2_tiny_256.pt weights
 
+    wget https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin2_large_384.pt
+    mv dpt_swin2_large_384.pt weights
+
+    wget https://github.com/isl-org/MiDaS/releases/download/v2_1/midas_v21_384.pt
+    mv midas_v21_384.pt weights
+
 fi
 
 
@@ -25,4 +31,12 @@ source ~/.bashrc
 conda activate bev
 
 # Run
-python run.py --model_type dpt_swin2_tiny_256 --input_path ../RAFT/fire_demo/frame --output_path output
+
+python run.py --model_type dpt_swin2_tiny_256 --input_path ../RAFT/fire_demo/frame \
+            --output_path output/dpt_swin2_tiny_256
+
+python run.py --model_type dpt_swin2_large_384 --input_path ../RAFT/fire_demo/frame \
+            --output_path output/dpt_swin2_large_384
+
+python run.py --model_type midas_v21_384 --input_path ../RAFT/fire_demo/frame \
+            --output_path output/midas_v21_384

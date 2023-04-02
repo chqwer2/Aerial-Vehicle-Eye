@@ -102,7 +102,7 @@ def create_side_by_side(image, depth, grayscale):
         return np.concatenate((image, right_side), axis=1)
 
 
-def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", optimize=False, side=False, height=None,
+def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", optimize=False, side=True, height=None,
         square=False, grayscale=False):
     """Run MonoDepthNN to compute depth maps.
 
@@ -164,8 +164,10 @@ def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", op
                 else:
                     original_image_bgr = np.flip(original_image_rgb, 2)
                     content = create_side_by_side(original_image_bgr*255, prediction, grayscale)
-                    cv2.imwrite(filename + ".png", content)
-                utils.write_pfm(filename + ".pfm", prediction.astype(np.float32))
+                    
+                    cv2.imwrite(filename + ".jpg", content)
+                    
+                # utils.write_pfm(filename + ".pfm", prediction.astype(np.float32))
 
     else:
         with torch.no_grad():
@@ -184,11 +186,13 @@ def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", op
 
                     original_image_bgr = np.flip(original_image_rgb, 2) if side else None
                     content = create_side_by_side(original_image_bgr, prediction, grayscale)
+                    
+                    
                     cv2.imshow('MiDaS Depth Estimation - Press Escape to close window ', content/255)
 
                     if output_path is not None:
                         filename = os.path.join(output_path, 'Camera' + '-' + model_type + '_' + str(frame_index))
-                        cv2.imwrite(filename + ".png", content)
+                        cv2.imwrite(filename + ".jpg", content)
 
                     alpha = 0.1
                     if time.time()-time_start > 0:
