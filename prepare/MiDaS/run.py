@@ -99,7 +99,7 @@ def create_side_by_side(image, depth, grayscale):
     if image is None:
         return right_side
     else:
-        return np.concatenate((image, right_side), axis=1)
+        return np.concatenate((image, right_side), axis=2)
 
 
 def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", optimize=False, side=True, height=None,

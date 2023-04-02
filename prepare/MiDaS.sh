@@ -33,10 +33,10 @@ conda activate bev
 # Run
 
 python run.py --model_type dpt_swin2_tiny_256 --input_path ../RAFT/fire_demo/frame \
-            --output_path output/dpt_swin2_tiny_256
+            --output_path output/dpt_swin2_tiny_256   --side
 
 python run.py --model_type dpt_swin2_large_384 --input_path ../RAFT/fire_demo/frame \
-            --output_path output/dpt_swin2_large_384
+            --output_path output/dpt_swin2_large_384  --side
 
 python run.py --model_type midas_v21_384 --input_path ../RAFT/fire_demo/frame \
-            --output_path output/midas_v21_384
+            --output_path output/midas_v21_384       --side
