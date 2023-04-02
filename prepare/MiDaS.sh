@@ -1,11 +1,23 @@
 
 
 
+#!/bin/bash
 
-#  dpt_swin2_tiny_256
+download=false
 
-# dpt_swin2_large_384
-wget https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin2_large_384.pt
+
+# download
+#gdown --folder 1sWDsfuZ3Up38EUQt7-JDTT1HcGHuJgvT
+#!/bin/bash
+if [ "$download" = true ] ; then
+    #  dpt_swin2_tiny_256
+    mkdir weights
+    wget https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin2_tiny_256.pt
+
+    mv dpt_swin2_tiny_256.pt weights
+
+fi
+
 
 
 
