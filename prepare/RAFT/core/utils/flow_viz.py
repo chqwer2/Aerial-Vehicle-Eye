@@ -16,6 +16,9 @@
 # Date Created: 2018-08-03
 
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+import PIL.Image as Image
 
 def make_colorwheel():
     """
@@ -130,3 +133,59 @@ def flow_to_image(flow_uv, clip_flow=None, convert_to_bgr=False):
     u = u / (rad_max + epsilon)
     v = v / (rad_max + epsilon)
     return flow_uv_to_colors(u, v, convert_to_bgr)
+
+
+
+
+def flow_to_arrow(flow_uv, clip_flow=None, convert_to_bgr=False):
+    """
+    Expects a two dimensional flow image of shape.
+
+    Args:
+        flow_uv (np.ndarray): Flow UV image of shape [H,W,2]
+        clip_flow (float, optional): Clip maximum of flow values. Defaults to None.
+        convert_to_bgr (bool, optional): Convert output image to BGR. Defaults to False.
+
+    Returns:
+        np.ndarray: Flow visualization image of shape [H,W,3]
+    """
+    assert flow_uv.ndim == 3, 'input flow must have three dimensions'
+    assert flow_uv.shape[2] == 2, 'input flow must have shape [H,W,2]'
+    
+    height, width, _ = flow_uv.shape
+    xx = np.arange(0,height,1)
+    yy = np.arange(0,width,1)
+    X, Y= np.meshgrid(xx,yy)
+    X = X.flatten()
+    Y = Y.flatten()
+
+    if clip_flow is not None:
+        flow_uv = np.clip(flow_uv, 0, clip_flow)
+    u = flow_uv[:,:,0]
+    v = flow_uv[:,:,1]
+    rad = np.sqrt(np.square(u) + np.square(v))
+    rad_max = np.max(rad)
+    epsilon = 1e-5
+    u = u / (rad_max + epsilon)
+    v = v / (rad_max + epsilon)
+    
+    # Draw
+    ax = plt.gca()
+    ax.xaxis.set_ticks_position('top')
+    ax.invert_yaxis()
+    # plt.quiver(X,Y, flow_x, flow_y, angles="xy", color="#666666")
+    
+    ax.quiver(X,Y, u, v, color="#666666")
+    ax.grid()
+    # ax.legend()
+    plt.draw()
+    
+   
+    canvas = FigureCanvasAgg(plt.gcf())
+    canvas.draw()
+    w, h = canvas.get_width_height()
+    buf = np.fromstring(canvas.tostring_argb(), dtype=np.uint8)
+    print("buf size:", w, h, " img size:", height, width)
+
+
+    return buf

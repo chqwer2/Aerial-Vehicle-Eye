@@ -27,8 +27,10 @@ def viz(img, flo, id):
     img = img[0].permute(1,2,0).cpu().numpy()
     flo = flo[0].permute(1,2,0).cpu().numpy()
     
-    # map flow to rgb image
-    flo = flow_viz.flow_to_image(flo)
+    # map flow to rgb image 
+    flo = flow_viz.flow_to_image(flo)  # flow to image
+    flo_ = flow_viz.flow_to_arrow(flo)  # flow to image
+    
     img_flo = np.concatenate([img, flo], axis=0)
 
     # import matplotlib.pyplot as plt

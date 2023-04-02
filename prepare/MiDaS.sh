@@ -9,6 +9,8 @@ download=false
 # download
 #gdown --folder 1sWDsfuZ3Up38EUQt7-JDTT1HcGHuJgvT
 #!/bin/bash
+cd MiDaS
+
 if [ "$download" = true ] ; then
     #  dpt_swin2_tiny_256
     mkdir weights
@@ -19,8 +21,8 @@ if [ "$download" = true ] ; then
 fi
 
 
-
-
+source ~/.bashrc
+conda activate bev
 
 # Run
-python run.py --model_type <model_type> --input_path input --output_path output
+python run.py --model_type dpt_swin2_tiny_256 --input_path ../RAFT/fire_demo/frame --output_path output
